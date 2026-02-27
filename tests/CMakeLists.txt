@@ -33,4 +33,7 @@ include(Catch)
 # Это нужно для корректной обработки кириллических имён тестов на Windows/MSVC:
 # без этого флага CMake кодирует имена при конфигурации в системной кодировке (CP1251),
 # а при запуске Catch2 использует UTF-8, что вызывает несовпадение фильтров.
-catch_discover_tests(tests DISCOVERY_MODE PRE_TEST)
+#
+# TEST_SPEC "~[stress]" — исключает нагрузочные тесты из стандартного ctest.
+# Тесты с тегом [stress] запускаются вручную: ./tests "[stress]"
+catch_discover_tests(tests DISCOVERY_MODE PRE_TEST TEST_SPEC "~[stress]")
